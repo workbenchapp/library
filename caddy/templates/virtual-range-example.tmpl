@@ -1,0 +1,94 @@
+
+# try to iterate
+{{range $i, $v := list "virtual_1" "virtual_2" "virtual_3" "virtual_4" "virtual_5" "virtual_6" "virtual_7" "virtual_8" "virtual_9"}}
+	{{$portL := list $v "port" | join "."}}
+	{{$pathL := list $v "path" | join "."}}
+	{{$authL := list $v "auth" | join "."}}
+	{{$requiredroleL := list $v "required_role" | join "."}}
+	{{$debugL := list $v "debug" | join "."}}
+	{{$domainL := list $v "domain" | join "."}}
+	{{$hostL := list $v "host" | join "."}}
+	{{$portalL := list $v "portal" | join "."}}
+	{{$portalpathL := list $v "portal_path" | join "."}}
+	{{$corsL := list $v "cors" | join "."}}
+
+	{{$tlsL := list $v "tls" | join "."}}
+	{{$tls1L := list $v "tls_1" | join "."}}
+
+	{{$matcherL := list $v matcher | join "_"}}
+
+	{{- if index labels $portL }}
+	{{- if index labels $tlsL }}
+{{if hasPrefix ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels $domainL)))) ((index labels $hostL)) -}} {
+{{index labels $hostL -}}
+{{else -}}
+{{hostname ((index labels $hostL))}}.{{default ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels "virtual.domain")))) ((index labels $domainL ))}} {
+{{end -}}
+	{{else -}}
+	*.{{default ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels "virtual.domain")))) ((index labels $domainL ))}}  {{default ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels "virtual.domain")))) ((index labels $domainL ))}} {
+		import dns_api_gandi
+	{{end -}}
+		# TODO: mmmm, will we ever deal with more than one domain, and different auth? inserting the virtual.auth templates here caused crashes
+
+		# TODO: this is not awesome, but it helps me use certs from another system to test moving LB pointers
+		{{- if index labels $tlsL }}
+		# https://caddyserver.com/docs/caddyfile/directives/tls
+		# tls <cert_file> <key_file>
+		tls {{index labels $tlsL}}
+		{{end -}}
+		{{- if index labels $tls1L }}
+		# https://caddyserver.com/docs/caddyfile/directives/tls
+		# tls <cert_file> <key_file>
+		tls {{index labels $tls1L}}
+		{{end -}}
+
+
+		@{{$matcherL}} {
+				# now, how to have {if host hasSuffix domain, elide domain}
+				host {{if hasPrefix ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels $domainL)))) ((index labels $hostL)) -}}
+{{index labels $hostL -}}
+{{else -}}
+{{hostname ((index labels $hostL))}}.{{default ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels "virtual.domain")))) ((index labels $domainL ))}}
+{{end -}}
+				{{ if index labels $pathL}}
+				path {{ index labels $pathL }}
+				{{ end }}
+		}
+		route @{{$matcherL}} {
+				{{ if index labels $authL }}
+					# TODO: figure out how to remove any existing value "*", not wildcard.
+					#header -access-control-allow-origin \*
+					header Access-Control-Allow-Credentials true
+
+					jwt {
+						#auth_url https://auth.{{default ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels "virtual.domain")))) ((index labels $domainL ))}} /
+						enable claim headers
+						allow roles *
+					}
+				{{ end }}
+				{{ if index labels $requiredroleL }}
+					jwt {
+						auth_url https://auth.{{default ((default ((default "loc.alho.st" ((env "DOMAIN")))) ((index labels "virtual.domain")))) ((index labels $domainL ))}} /
+						enable claim headers
+						allow roles {{ index labels $requiredroleL }}
+					}
+				{{ end }}
+				{{ if index labels $debugL }}
+					trace tag={{$debugL}}.{{$matcherL}}" response_debug=yes
+				{{ end }}
+
+				reverse_proxy {{upstreams ((index labels $portL | int)) }} {
+					# TODO: how to set a list of them?
+					# if you need * and no auth, then set virtual.cors: '*'
+					{{ if index labels $corsL }}
+						header_down access-control-allow-origin {{index labels $corsL}}
+					{{ else }}
+						# TODO: I'm not sure this is a good default, but ereefs needs it atm
+						header_down access-control-allow-origin *
+					{{ end }}
+				}
+		}
+		# TODO: removed the portal too - as more than one domain with more than one auth made things fall over
+	}
+	{{ end -}}
+{{end}}

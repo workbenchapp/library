@@ -1,0 +1,50 @@
+
+# NOTE: requires aaa-common.tmpl
+
+
+{{- if index labels "virtual.port" }}
+*.{{template "domain"}} {{template "domain"}} {
+	import dns_api_gandi
+	@{{matcher}} {
+			# now, how to have {if host hasSuffix domain, elide domain}
+			host {{template "hostmatcher"}}
+			{{ if index labels "virtual.path" }}
+			path {{ index labels "virtual.path" }}
+			{{ end }}
+	}
+	route @{{matcher}} {
+			{{ if index labels "virtual.auth" }}
+			# TODO: figure out how to remove any existing value "*", not wildcard.
+			#header -access-control-allow-origin \*
+			header Access-Control-Allow-Credentials true
+
+			jwt {
+				#auth_url https://auth.{{template "domain"}}/
+				enable claim headers
+				allow roles *
+			}
+			{{ end }}
+			{{ if index labels "virtual.required_role" }}
+			jwt {
+				auth_url https://auth.{{template "domain"}}/
+				enable claim headers
+				allow roles {{ index labels "virtual.required_role" }}
+			}
+			{{ end }}
+			{{ if index labels "virtual.debug" }}
+			trace tag="virtual.debug.{{matcher}}" response_debug=yes
+			{{ end }}
+			reverse_proxy {{upstreams ((index labels "virtual.port" | int)) }} {
+				# TODO: how to set a list of them?
+				# if you need * and no auth, then set virtual.cors: '*'
+				{{ if index labels "virtual.cors" }}
+					header_down access-control-allow-origin {{index labels "virtual.cors"}}
+				{{ else }}
+					# TODO: I'm not sure this is a good default, but ereefs needs it atm
+					header_down access-control-allow-origin *
+				{{ end }}
+			}
+	}
+}
+{{ end -}}
+

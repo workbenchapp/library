@@ -1,0 +1,22 @@
+{
+    "version": "1",
+    "specs": [
+        {
+            "type": "docker-compose",
+            "name": "Caddy",
+            "description": "reverse proxy",
+            "logo": "https://caddyserver.com/resources/images/caddy-logo.svg",
+            "dependencies": [],
+            "url": "https://caddyserver.com",
+            "spec": "./caddy/docker-compose.yml",
+            "environment": [
+                {
+                    "name": "DOMAIN",
+                    "label": "The Top level domain to add container proxying to",
+                    "description": "top level DNS that containers will get added to either using *.DOMAIN, or DOMAIN/path, or a mixture.",
+                    "default": "loc.alho.st"
+                }
+            ]
+        }
+    ]
+}
