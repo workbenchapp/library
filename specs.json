@@ -4,7 +4,7 @@
         {
             "type": "docker-compose",
             "name": "Caddy",
-            "description": "reverse proxy",
+            "description": "Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go.",
             "logo": "https://caddyserver.com/resources/images/caddy-logo.svg",
             "dependencies": [],
             "url": "https://caddyserver.com",
