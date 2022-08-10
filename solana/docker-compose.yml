@@ -11,9 +11,12 @@ services:
     networks:
       - caddy_proxy
     labels:
+      caddy.tls: "internal"
+      caddy: solana.loc.alho.st
+      caddy.reverse_proxy: "{{upstreams 8900}}"
       # tell Caddy what port on the container to talk http to
-      virtual.host: "solana"
-      virtual.port: "8900"
+      # virtual.host: "solana"
+      # virtual.port: "8900"
     restart: always
 
 volumes:
