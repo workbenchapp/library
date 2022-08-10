@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  validator:
+    image: workbenchapp/solana-amman:v1.11.5
+    environment:
+    volumes:
+      - data:/data
+    networks:
+      - caddy_proxy
+    labels:
+      # tell Caddy what port on the container to talk http to
+      virtual.port: "80"
+    restart: always
+
+volumes:
+  data: null
+
+networks:
+  caddy_proxy:
+    external: true

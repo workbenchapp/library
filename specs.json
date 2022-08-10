@@ -17,6 +17,30 @@
                     "default": "loc.alho.st"
                 }
             ]
+        },
+        {
+            "type": "docker-compose",
+            "name": "echo request",
+            "description": "echo the https request as seen by the internal container",
+            "logo": "",
+            "dependencies": [
+                "Caddy"
+            ],
+            "url": "https://hub.docker.com/r/svendowideit/echo/tags",
+            "spec": "./echo/docker-compose.yml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "Solana validator",
+            "description": "Web-Scale Blockchain for fast, secure, scalable, decentralized apps and marketplaces. ",
+            "logo": "https://camo.githubusercontent.com/75fa540a153000d5b9dc90317184dc7177ecbf2bff43f9ed77cf62f2776fa04a/68747470733a2f2f692e696d6775722e636f6d2f494b797a5136542e706e67",
+            "dependencies": [
+                "Caddy"
+            ],
+            "url": "https://solana.com/",
+            "spec": "./solana/docker-compose.yml",
+            "environment": []
         }
     ]
 }
