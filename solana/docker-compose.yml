@@ -14,9 +14,12 @@ services:
       caddy.tls: "internal"
       caddy: solana.loc.alho.st
       caddy.reverse_proxy: "{{upstreams 8900}}"
-      # tell Caddy what port on the container to talk http to
-      # virtual.host: "solana"
-      # virtual.port: "8900"
+      # this would put the ws connections on 443 too - no idea how that works out (do we need to tell the validator?)
+      caddy_1: solana.loc.alho.st
+      caddy_1.@ws.0_header: "Connection *Upgrade*"
+      caddy_1.@ws.1_header: "Upgrade websocket"
+      caddy_1.0_reverse_proxy: "@ws {{upstreams 8899}}"
+      #caddy.1_reverse_proxy: /api* {{upstreams}}
     restart: always
 
 volumes:

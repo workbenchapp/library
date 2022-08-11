@@ -12,6 +12,7 @@ services:
       - CADDY_INGRESS_NETWORKS=caddy_proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
       - caddy_proxy_data:/data
     networks:
       - caddy_proxy
