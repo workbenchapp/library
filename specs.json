@@ -23,6 +23,56 @@
         },
         {
             "type": "docker-compose",
+            "name": "Gitea with PostgreSQL",
+            "description": "Gitea is a painless self-hosted Git service. It is similar to GitHub, Bitbucket, and GitLab",
+            "logo": "https://docs.gitea.io/images/gitea.png",
+            "dependencies": [],
+            "url": "https://github.com/docker/awesome-compose/tree/master/gitea-postgres",
+            "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/gitea-postgres/compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "Minecraft",
+            "description": "basic setup for a Minecraft server",
+            "logo": "https://www.minecraft.net/content/dam/games/minecraft/logos/logo-minecraft.svg",
+            "dependencies": [],
+            "url": "https://github.com/docker/awesome-compose/tree/master/minecraft",
+            "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/minecraft/compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "elasticsearch-logstash-kibana",
+            "description": "elasticsearch-logstash-kibana",
+            "logo": "",
+            "dependencies": [],
+            "url": "https://github.com/jarry-xiao/candyland",
+            "spec": "https://raw.githubusercontent.com/jarry-xiao/candyland/89d0e8d0d0de156b4715db8f3a62febb88faecae/docker-compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "The Graph Node for Ethereum",
+            "description": "Graph Node indexes data from blockchains such as Ethereum and serves it over GraphQL ",
+            "logo": "",
+            "dependencies": [],
+            "url": "https://github.com/graphprotocol/graph-node",
+            "spec": "https://raw.githubusercontent.com/graphprotocol/graph-node/master/docker/docker-compose.yml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "Candyland",
+            "description": "Proof of concept program for compressing NFTs",
+            "logo": "",
+            "dependencies": [],
+            "url": "https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana",
+            "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/elasticsearch-logstash-kibana/compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
             "name": "Bryan's X11 with vnc",
             "description": "Trying it out",
             "logo": "https://en.wikipedia.org/wiki/X_Window_System#/media/File:X.Org_Logo.svg",
