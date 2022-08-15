@@ -23,6 +23,26 @@
         },
         {
             "type": "docker-compose",
+            "name": "WordPress with MySQL",
+            "description": "The WordPress rich content management system can utilize plugins, widgets, and themes.",
+            "logo": "https://s.w.org/images/wmark.png",
+            "dependencies": [],
+            "url": "https://github.com/docker/awesome-compose/tree/master/wordpress-mysql",
+            "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/wordpress-mysql/compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "Prometheus & Grafana",
+            "description": "open-source systems monitoring and alerting .",
+            "logo": "https://duckduckgo.com/i/6e236905.png",
+            "dependencies": [],
+            "url": "https://github.com/docker/awesome-compose/tree/master/prometheus-grafana",
+            "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/prometheus-grafana/compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
             "name": "Gitea with PostgreSQL",
             "description": "Gitea is a painless self-hosted Git service. It is similar to GitHub, Bitbucket, and GitLab",
             "logo": "https://docs.gitea.io/images/gitea.png",
@@ -45,7 +65,7 @@
             "type": "docker-compose",
             "name": "elasticsearch-logstash-kibana",
             "description": "elasticsearch-logstash-kibana",
-            "logo": "",
+            "logo": "https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blt280217a63b82a734/6202d3378b1f312528798412/elastic-logo.svg",
             "dependencies": [],
             "url": "https://github.com/jarry-xiao/candyland",
             "spec": "https://raw.githubusercontent.com/jarry-xiao/candyland/89d0e8d0d0de156b4715db8f3a62febb88faecae/docker-compose.yaml",
@@ -54,7 +74,7 @@
         {
             "type": "docker-compose",
             "name": "The Graph Node for Ethereum",
-            "description": "Graph Node indexes data from blockchains such as Ethereum and serves it over GraphQL ",
+            "description": "The Graph Node indexes data from blockchains such as Ethereum and serves it over GraphQL ",
             "logo": "",
             "dependencies": [],
             "url": "https://github.com/graphprotocol/graph-node",
