@@ -34,11 +34,21 @@
         {
             "type": "docker-compose",
             "name": "Prometheus & Grafana",
-            "description": "open-source systems monitoring and alerting .",
+            "description": "open-source systems monitoring and alerting.",
             "logo": "https://duckduckgo.com/i/6e236905.png",
             "dependencies": [],
             "url": "https://github.com/docker/awesome-compose/tree/master/prometheus-grafana",
             "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/prometheus-grafana/compose.yaml",
+            "environment": []
+        },
+        {
+            "type": "docker-compose",
+            "name": "Portainer (CE)",
+            "description": "Easily deploy, configure and secure containers in minutes on Docker, Kubernetes, Swarm and Nomad in any cloud, datacenter or device.",
+            "logo": "https://www.portainer.io/hs-fs/hubfs/PortainerTM-blue-landscape-small-web-300px.png?width=300&name=PortainerTM-blue-landscape-small-web-300px.png",
+            "dependencies": [],
+            "url": "https://github.com/docker/awesome-compose/tree/master/portainer",
+            "spec": "https://raw.githubusercontent.com/docker/awesome-compose/master/portainer/compose.yaml",
             "environment": []
         },
         {
