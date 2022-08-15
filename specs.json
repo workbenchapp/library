@@ -3,29 +3,10 @@
     "specs": [
         {
             "type": "docker-compose",
-            "name": "Caddy",
-            "description": "Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go.",
-            "logo": "https://caddyserver.com/resources/images/caddy-logo.svg",
-            "dependencies": [],
-            "url": "https://caddyserver.com",
-            "spec": "./caddy/docker-compose.yml",
-            "environment": [
-                {
-                    "name": "DOMAIN",
-                    "label": "The Top level domain to add container proxying to",
-                    "description": "top level DNS that containers will get added to either using *.DOMAIN, or DOMAIN/path, or a mixture.",
-                    "default": "loc.alho.st"
-                }
-            ]
-        },
-        {
-            "type": "docker-compose",
             "name": "echo request",
             "description": "echo the https request as seen by the internal container",
             "logo": "",
-            "dependencies": [
-                "Caddy"
-            ],
+            "dependencies": [],
             "url": "https://hub.docker.com/r/svendowideit/echo/tags",
             "spec": "./echo/docker-compose.yml",
             "environment": []
@@ -35,9 +16,7 @@
             "name": "Solana validator",
             "description": "Web-Scale Blockchain for fast, secure, scalable, decentralized apps and marketplaces. ",
             "logo": "https://camo.githubusercontent.com/75fa540a153000d5b9dc90317184dc7177ecbf2bff43f9ed77cf62f2776fa04a/68747470733a2f2f692e696d6775722e636f6d2f494b797a5136542e706e67",
-            "dependencies": [
-                "Caddy"
-            ],
+            "dependencies": [],
             "url": "https://solana.com/",
             "spec": "./solana/docker-compose.yml",
             "environment": []

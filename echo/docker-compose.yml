@@ -3,19 +3,6 @@ version: "2"
 services:
   echo:
     image: svendowideit/echo:latest
-    networks:
-      - caddy_proxy
-    labels:
-      caddy.tls: "internal"
-      caddy: echo.loc.alho.st
-      caddy.reverse_proxy: "{{upstreams 80}}"
-      # tell Caddy what port on the container to talk http to
-      # virtual.host: "echo"
-      # virtual.port: "80"
-      #virtual.debug: "true"
+    ports:
+      - "80" # http
     restart: always
-
-networks:
-  caddy_proxy:
-    external: true
-    name: caddy_proxy

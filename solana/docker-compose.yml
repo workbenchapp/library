@@ -8,23 +8,10 @@ services:
     #environment:
     volumes:
       - data:/data
-    networks:
-      - caddy_proxy
-    labels:
-      caddy.tls: "internal"
-      caddy: solana.loc.alho.st
-      caddy.reverse_proxy: "{{upstreams 8900}}"
-      # this would put the ws connections on 443 too - no idea how that works out (do we need to tell the validator?)
-      caddy_1: solana.loc.alho.st
-      caddy_1.@ws.0_header: "Connection *Upgrade*"
-      caddy_1.@ws.1_header: "Upgrade websocket"
-      caddy_1.0_reverse_proxy: "@ws {{upstreams 8899}}"
-      #caddy.1_reverse_proxy: /api* {{upstreams}}
+    ports:
+      - "8900" # RPC port
+      - "8899" # websocket port
     restart: always
 
 volumes:
   data: null
-
-networks:
-  caddy_proxy:
-    external: true
